@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11542630684"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-11542630684');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Angel Tree | Misiunea Iubirii</title>
+    <meta name="description" content="Sponsor a Christmas gift for an orphan or vulnerable child in Romania. Pick an angel from our virtual tree and bring joy this season.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:wght@400;700;900&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0F172A',
+                            accent: '#2563EB',
+                            orange: '#EA580C',
+                            cream: '#F8F7F4',
+                            red: '#DC2626', /* Christmas Red */
+                            green: '#166534', /* Christmas Green */
+                            gold: '#F59E0B', /* Star Gold */
+                        },
+                        fontFamily: {
+                            script: ['Great Vibes', 'cursive'],
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'twinkle': 'twinkle 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        twinkle: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.5' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Snowfall Effect */
+        .snowflake {
+            color: #fff;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            text-shadow: 0 0 5px #000;
+            position: fixed;
+            top: -10%;
+            z-index: 9999;
+            user-select: none;
+            cursor: default;
+            animation-name: snowflakes-fall, snowflakes-shake;
+            animation-duration: 10s, 3s;
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite, infinite;
+            animation-play-state: running, running;
+        }
+        @keyframes snowflakes-fall {
+            0% { top: -10%; }
+            100% { top: 100%; }
+        }
+        @keyframes snowflakes-shake {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(80px); }
+        }
+        
+        .snowflake:nth-of-type(0) { left: 1%; animation-delay: 0s, 0s; }
+        .snowflake:nth-of-type(1) { left: 10%; animation-delay: 1s, 1s; }
+        .snowflake:nth-of-type(2) { left: 20%; animation-delay: 6s, 0.5s; }
+        .snowflake:nth-of-type(3) { left: 30%; animation-delay: 4s, 2s; }
+        .snowflake:nth-of-type(4) { left: 40%; animation-delay: 2s, 2s; }
+        .snowflake:nth-of-type(5) { left: 50%; animation-delay: 8s, 3s; }
+        .snowflake:nth-of-type(6) { left: 60%; animation-delay: 6s, 2s; }
+        .snowflake:nth-of-type(7) { left: 70%; animation-delay: 2.5s, 1s; }
+        .snowflake:nth-of-type(8) { left: 80%; animation-delay: 1s, 0s; }
+        .snowflake:nth-of-type(9) { left: 90%; animation-delay: 3s, 1.5s; }
+        .snowflake:nth-of-type(10) { left: 25%; animation-delay: 2s, 0s; }
+        
+        /* Tree Ornament Hover */
+        .ornament:hover {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        /* Simple CSS Tree Shape */
+        .css-tree {
+            width: 0; 
+            height: 0; 
+            border-left: 300px solid transparent;
+            border-right: 300px solid transparent;
+            border-bottom: 500px solid #166534; /* brand-green */
+            position: absolute;
+            bottom: 50px;
+            z-index: 0;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        }
+        /* Tree Stump */
+        .css-tree::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #5D4037;
+            bottom: -560px; /* relative to the border-bottom */
+            left: -30px;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 antialiased bg-brand-cream">
+
+    <!-- Snowflakes -->
+    <div class="snowflake">❅</div><div class="snowflake">❆</div><div class="snowflake">❅</div>
+    <div class="snowflake">❆</div><div class="snowflake">❅</div><div class="snowflake">❆</div>
+    <div class="snowflake">❅</div><div class="snowflake">❆</div><div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+
+    <!-- NAVIGATION -->
+    <nav class="bg-white/95 backdrop-blur-sm fixed w-full z-50 shadow-sm border-b border-gray-100 transition-all duration-300" id="main-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex-shrink-0 flex items-center gap-3 group cursor-pointer">
+                    <img src="images/logotransparent-big.png" alt="Logo" class="w-10 h-10 rounded-lg shadow-md group-hover:opacity-80 transition-opacity duration-300 object-cover">
+                    <div>
+                        <span class="block text-xl font-black text-brand-blue tracking-tight font-serif group-hover:text-brand-orange transition-colors duration-300">MISIUNEA IUBIRII</span>
+                        <span class="block text-xs font-semibold text-gray-500 uppercase tracking-widest">Mission of Love</span>
+                    </div>
+                </a>
+
+                <div class="hidden md:flex md:items-center md:space-x-1">
+                    <a href="index.html" class="px-3 py-2 text-sm font-semibold text-gray-600 hover:text-brand-blue hover:bg-gray-50 rounded-full transition">Home</a>
+                    <a href="index.html#mission" class="px-3 py-2 text-sm font-semibold text-gray-600 hover:text-brand-blue hover:bg-gray-50 rounded-full transition">Mission</a>
+                    
+                    <!-- Updated Tabs -->
+                    <a href="disaster.html" class="px-3 py-2 text-sm font-semibold text-gray-600 hover:text-brand-blue hover:bg-gray-50 rounded-full transition">Disaster</a>
+                    <a href="christmas.html" class="px-3 py-2 text-sm font-semibold text-brand-orange bg-orange-50 rounded-full transition">Angel Tree</a>
+                    <a href="members.html" class="px-3 py-2 text-sm font-semibold text-gray-600 hover:text-brand-blue hover:bg-gray-50 rounded-full transition">Members</a>
+                    
+                    <div class="pl-3 ml-2 flex items-center gap-4 border-l border-gray-200">
+                        <a href="#angel-tree" class="bg-brand-red hover:bg-red-700 text-white px-5 py-3 rounded-full font-bold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition duration-200 flex items-center gap-2 text-sm">
+                            <i class="fas fa-gift"></i> SPONSOR A GIFT
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-500 hover:text-brand-blue focus:outline-none p-2 rounded-md hover:bg-gray-100">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 shadow-lg absolute w-full">
+            <div class="px-4 pt-4 pb-6 space-y-3">
+                <a href="index.html" class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-brand-blue hover:bg-gray-50 rounded-lg transition">Home</a>
+                <a href="index.html#mission" class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-brand-blue hover:bg-gray-50 rounded-lg transition">Our Mission</a>
+                <a href="disaster.html" class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-brand-blue hover:bg-gray-50 rounded-lg transition">Disaster Relief</a>
+                <a href="christmas.html" class="block px-4 py-3 text-base font-semibold text-brand-orange bg-orange-50 rounded-lg transition">Angel Tree <i class="fas fa-tree ml-2"></i></a>
+                <a href="members.html" class="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-brand-blue hover:bg-gray-50 rounded-lg transition">Members Area</a>
+                <a href="#angel-tree" class="block w-full text-center mt-4 bg-brand-red text-white px-4 py-4 rounded-full font-bold shadow-md">Pick an Angel</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <div class="relative bg-brand-red pt-32 pb-24 lg:pt-48 lg:pb-36 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <!-- Christmas Image Placeholder -->
+            <img src="images/christmas-hero.jpg" onerror="this.src='https://images.unsplash.com/photo-1543589077-47d81606c1bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80'" alt="Christmas Tree Lights" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
+        </div>
+        
+        <div class="absolute inset-0 z-0 bg-gradient-to-b from-brand-red/90 via-brand-red/80 to-brand-red/95"></div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="font-script text-4xl md:text-5xl text-yellow-300 animate-pulse block mb-4">Be an Angel to a Child</span>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight mb-8 leading-tight font-serif drop-shadow-xl">
+                The Virtual Angel Tree
+            </h1>
+            <p class="mt-6 max-w-2xl mx-auto text-xl md:text-2xl text-red-100 mb-12 font-medium leading-relaxed drop-shadow-md">
+                For many orphans in Romania, Christmas is just another cold day. You can change that. Pick a digital ornament, see a child's wish, and make it come true today.
+            </p>
+            <div class="flex justify-center">
+                <a href="#angel-tree" class="bg-white text-brand-red hover:bg-gray-100 text-lg px-10 py-4 rounded-full font-bold shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 flex items-center gap-2">
+                    <i class="fas fa-tree"></i> Visit the Tree
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- THE INTERACTIVE TREE SECTION -->
+    <section id="angel-tree" class="py-16 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 relative z-20">
+                <h2 class="text-3xl font-black text-brand-blue mb-4 font-serif">Pick an Ornament, Bless a Child</h2>
+                <p class="text-gray-600 text-lg">Click any glowing ornament to reveal a child's Christmas wish.</p>
+            </div>
+
+            <!-- The Tree Container -->
+            <div class="relative max-w-4xl mx-auto min-h-[700px] flex justify-center items-end pb-12">
+                <!-- CSS Tree Shape -->
+                <div class="css-tree"></div>
+
+                <!-- Ornaments Grid (Positioned absolutely over the triangle) -->
+                <div class="relative z-10 w-full h-[500px] flex flex-col items-center justify-between pb-8">
+                    
+                    <!-- Top Star -->
+                    <div class="animate-twinkle cursor-pointer -mt-16 mb-4" onclick="openModal('General Fund', 'Help All Children', 'Any Amount', 'star')">
+                        <i class="fas fa-star text-7xl text-brand-gold drop-shadow-lg filter hover:brightness-125 transition"></i>
+                    </div>
+
+                    <!-- Row 1 (Top) -->
+                    <div class="flex gap-8">
+                        <button onclick="openRandomModal()" class="ornament w-14 h-14 rounded-full bg-red-500 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden group">
+                            <i class="fas fa-gift text-lg"></i>
+                            <div class="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent"></div>
+                        </button>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="flex gap-12">
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-blue-600 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-snowflake text-xl"></i>
+                        </button>
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-brand-gold shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-bell text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div class="flex gap-16">
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-purple-600 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-holly-berry text-xl"></i>
+                        </button>
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-red-600 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-candy-cane text-xl"></i>
+                        </button>
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-teal-600 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-snowman text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Row 4 -->
+                    <div class="flex gap-12">
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-indigo-600 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-sleigh text-xl"></i>
+                        </button>
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-brand-orange shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-mitten text-xl"></i>
+                        </button>
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-pink-500 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-gift text-xl"></i>
+                        </button>
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-green-500 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-star text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Row 5 (Bottom) -->
+                    <div class="flex gap-8">
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-red-700 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-heart text-xl"></i>
+                        </button>
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-yellow-500 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-church text-xl"></i>
+                        </button>
+                        <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-blue-700 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-praying-hands text-xl"></i>
+                        </button>
+                          <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-purple-700 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-dove text-xl"></i>
+                        </button>
+                          <button onclick="openRandomModal()" class="ornament w-16 h-16 rounded-full bg-teal-700 shadow-lg flex items-center justify-center text-white font-bold border-2 border-white/50 relative overflow-hidden">
+                            <i class="fas fa-bible text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 relative z-20">
+                <p class="text-sm text-gray-500 italic">*Each click reveals a unique child's wish. Gifts are distributed based on greatest need.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GIFT MODAL -->
+    <div id="giftModal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-lg border-t-8 border-brand-red">
+                    
+                    <div class="absolute right-4 top-4">
+                        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-2xl focus:outline-none">&times;</button>
+                    </div>
+
+                    <div class="px-6 py-8 text-center">
+                        <div class="mx-auto flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-full bg-red-100 mb-6">
+                            <i class="fas fa-gift text-4xl text-brand-red animate-float"></i>
+                        </div>
+                        
+                        <h3 class="text-3xl font-black text-gray-900 mb-2 font-serif" id="modal-name">Child Name</h3>
+                        <p class="text-sm text-gray-500 uppercase tracking-widest font-bold mb-6">Age: <span id="modal-age">0</span></p>
+                        
+                        <div class="bg-brand-cream p-6 rounded-xl border border-gray-200 mb-8">
+                            <p class="text-gray-600 italic mb-2">"All I want for Christmas is..."</p>
+                            <p class="text-2xl font-bold text-brand-blue" id="modal-wish">Wish Item</p>
+                        </div>
+
+                        <div class="flex flex-col gap-4">
+                            <a id="donate-btn" href="#" target="_blank" class="w-full bg-brand-red hover:bg-red-700 text-white text-xl px-4 py-4 rounded-xl font-bold shadow-lg transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                                Grant this Wish ($<span id="modal-cost">0</span>)
+                            </a>
+                            
+                            <a id="donate-any-btn" href="https://checkout.revolut.com/pay/b1b6dab4-48f9-43b9-866b-23ffaf181297" target="_blank" class="w-full bg-white border-2 border-brand-red text-brand-red hover:bg-red-50 text-xl px-4 py-4 rounded-xl font-bold shadow-sm transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                                Donate Any Amount
+                            </a>
+                            
+                            <p class="text-xs text-gray-400">Secure donation via Revolut</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <section class="py-24 bg-brand-cream border-t border-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-black text-brand-blue mb-12 font-serif">How the Angel Tree Works</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl shadow-sm mx-auto mb-4 text-brand-red">1</div>
+                    <h3 class="font-bold text-lg mb-2">Choose an Angel</h3>
+                    <p class="text-sm text-gray-600">Click an ornament on the tree to see a child's name and their specific Christmas wish.</p>
+                </div>
+                <div>
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl shadow-sm mx-auto mb-4 text-brand-red">2</div>
+                    <h3 class="font-bold text-lg mb-2">Donate the Gift</h3>
+                    <p class="text-sm text-gray-600">Your donation covers the cost of the item. We purchase, wrap, and personalize it.</p>
+                </div>
+                <div>
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl shadow-sm mx-auto mb-4 text-brand-red">3</div>
+                    <h3 class="font-bold text-lg mb-2">We Deliver Joy</h3>
+                    <p class="text-sm text-gray-600">Our team delivers the gifts directly to orphanages and families in Romania on Christmas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Consistent with Site) -->
+    <footer class="bg-gray-950 text-gray-400 py-16 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-12 lg:gap-16">
+            <div class="col-span-1 md:col-span-2">
+                 <div class="flex items-center gap-3 mb-6">
+                    <img src="images/logotransparent-big.png" alt="Logo" class="w-10 h-10 rounded-lg shadow-inner object-cover">
+                    <h3 class="text-white text-2xl font-black font-serif tracking-tight">MISIUNEA IUBIRII</h3>
+                </div>
+                <p class="mb-4 max-w-md text-lg leading-relaxed">
+                    A USA-based, Christ-centered global charity mobilized to answer the urgent call of human suffering. We defend the fatherless, plead for the widow, and rescue the oppressed. (Isaiah 1:17)
+                </p>
+                <div class="text-sm text-gray-500 mb-6">
+                    <p><strong class="text-gray-400">Official Mailing Address:</strong><br>
+                    Troutdale, OR 97060, USA</p>
+                </div>
+                <div class="flex space-x-5">
+                    <a href="https://www.facebook.com/MisiuneaIubirii" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-blue transition duration-300"><i class="fab fa-facebook-f text-lg"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 uppercase text-sm tracking-wider">Quick Links</h4>
+                <ul class="space-y-4 text-base font-medium">
+                    <li><a href="index.html" class="hover:text-brand-orange transition block py-1">Home</a></li>
+                    <li><a href="index.html#mission" class="hover:text-brand-orange transition block py-1">Our Pillars</a></li>
+                    <li><a href="disaster.html" class="hover:text-brand-orange transition block py-1 text-brand-orange">Disaster Relief</a></li>
+                    <li><a href="christmas.html" class="hover:text-brand-orange transition block py-1">Angel Tree</a></li>
+                    <li><a href="mailto:support@lovemin.org" class="hover:text-brand-orange transition block py-1">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 uppercase text-sm tracking-wider">Legal & Trust</h4>
+                <ul class="space-y-4 text-sm font-medium">
+                    <li><a href="#" class="hover:text-brand-orange transition block py-1">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-brand-orange transition block py-1">Terms of Service</a></li>
+                </ul>
+                <div class="mt-8 pt-6 border-t border-gray-800">
+                      <p class="text-xs text-gray-500 leading-relaxed">
+                        Misiunea Iubirii is a project of <strong>Love Ministries International LLC</strong>, a registered 501(c)(3) non-profit organization registered in Oregon.<br>
+                        <strong>EIN:</strong> 39-4219015<br> 
+                        <span class="text-green-500 font-bold">All donations are tax-deductible.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-12 pt-8 border-t border-gray-900 text-center">
+            <p class="text-gray-500 text-xs uppercase tracking-widest font-semibold mb-2">Organization Leadership</p>
+            <p class="text-gray-400 text-sm">
+                <span class="text-white font-bold">Paul Lazau</span> | Founder & Executive Director<br>
+                <span class="text-brand-orange">Email:</span> <a href="mailto:support@lovemin.org" class="hover:text-white transition">support@lovemin.org</a>
+            </p>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-8 border-t border-gray-900 text-center text-sm font-medium text-gray-500">
+            <p>&copy; 2025 Misiunea Iubirii. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const nav = document.getElementById('main-nav');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // Angel Tree Data & Logic
+        const kids = [
+            // Boys - costs updated to 50, 75, 100
+            { name: "Andrei", age: 8, wish: "Winter Boots & Coat", cost: 75 },
+            { name: "Matei", age: 10, wish: "School Supplies & Bag", cost: 50 },
+            { name: "David", age: 5, wish: "Toy Truck & Clothes", cost: 50 },
+            { name: "Ionut", age: 7, wish: "Lego Set & Shoes", cost: 75 },
+            { name: "Gabriel", age: 4, wish: "Plush Bear & Blanket", cost: 50 },
+            { name: "Luca", age: 8, wish: "Winter Boots", cost: 50 },
+            { name: "Stefan", age: 14, wish: "Backpack & Supplies", cost: 50 },
+            { name: "Alex", age: 9, wish: "Soccer Ball & Cleats", cost: 75 },
+            { name: "Cristian", age: 11, wish: "Warm Jacket & Boots", cost: 100 },
+            { name: "Mihai", age: 6, wish: "Toy Car Set", cost: 50 },
+            { name: "Florin", age: 12, wish: "Art Supplies & Easel", cost: 75 },
+            { name: "Vasile", age: 13, wish: "Books & Educational Games", cost: 50 },
+            { name: "Radu", age: 9, wish: "Gloves, Hat & Scarf", cost: 50 },
+            { name: "Adrian", age: 7, wish: "Building Blocks Set", cost: 50 },
+            { name: "Bogdan", age: 10, wish: "Remote Car & Batteries", cost: 75 },
+            { name: "Ciprian", age: 8, wish: "Sneakers & Socks", cost: 75 },
+            { name: "Darius", age: 5, wish: "Puzzle & Games", cost: 50 },
+            { name: "Eduard", age: 6, wish: "Train Set", cost: 75 },
+            { name: "Filip", age: 9, wish: "Board Game Collection", cost: 50 },
+            { name: "George", age: 11, wish: "Full School Kit", cost: 75 },
+            { name: "Horia", age: 13, wish: "Headphones & Music", cost: 50 },
+            { name: "Iulian", age: 7, wish: "Action Figure Set", cost: 50 },
+            { name: "Laurentiu", age: 10, wish: "Basketball & Hoop", cost: 75 },
+            { name: "Marian", age: 12, wish: "Sweater & Jeans", cost: 75 },
+            { name: "Nicolae", age: 8, wish: "Pajamas & Robe", cost: 50 },
+            { name: "Octavian", age: 6, wish: "Dinosaur Toy Set", cost: 50 },
+            { name: "Paul", age: 9, wish: "Watch & Wallet", cost: 50 },
+            { name: "Razvan", age: 11, wish: "Science Kit & Lab", cost: 75 },
+            { name: "Sebastian", age: 5, wish: "Coloring Books & Crayons", cost: 50 },
+            { name: "Tudor", age: 7, wish: "Toy Plane & Airport", cost: 50 },
+            { name: "Victor", age: 10, wish: "Chess Set & Clock", cost: 50 },
+            { name: "Vlad", age: 12, wish: "Hoodie & Sweatpants", cost: 75 },
+            { name: "Alexandru", age: 8, wish: "Socks, Underwear & PJs", cost: 50 },
+            { name: "Cosmin", age: 13, wish: "Gym Bag & Gear", cost: 75 },
+            { name: "Dan", age: 6, wish: "Play Dough Set", cost: 50 },
+            { name: "Dragos", age: 9, wish: "Flashlight & Camping Gear", cost: 50 },
+            { name: "Emil", age: 11, wish: "Slippers & Robe", cost: 50 },
+            { name: "Gheorghe", age: 7, wish: "Tool Set Toy", cost: 50 },
+            { name: "Liviu", age: 10, wish: "Raincoat & Boots", cost: 75 },
+            { name: "Mircea", age: 5, wish: "Stuffed Dog & Bed", cost: 50 },
+            { name: "Petru", age: 8, wish: "Crayons, Paper & Markers", cost: 50 },
+            { name: "Robert", age: 12, wish: "Wallet & Watch", cost: 50 },
+            { name: "Sergiu", age: 14, wish: "Deodorant Set & Hygiene", cost: 50 },
+            { name: "Silviu", age: 6, wish: "Toy Boat & Bath Toys", cost: 50 },
+            { name: "Teodor", age: 9, wish: "Scarf & Gloves Set", cost: 50 },
+            { name: "Tiberiu", age: 11, wish: "Belt & Accessories", cost: 50 },
+            { name: "Valentin", age: 7, wish: "Kite & Outdoor Toys", cost: 50 },
+            { name: "Viorel", age: 10, wish: "Yo-Yo & Skill Toys", cost: 50 },
+            { name: "Alin", age: 8, wish: "Gloves & Hat", cost: 50 },
+            { name: "Claudiu", age: 13, wish: "Beanie & Scarf", cost: 50 },
+
+            // Girls - costs updated to 50, 75, 100
+            { name: "Sofia", age: 6, wish: "Doll, Carriage & Candy", cost: 75 },
+            { name: "Elena", age: 12, wish: "Art Set & Canvas", cost: 75 },
+            { name: "Maria", age: 9, wish: "Warm Coat & Boots", cost: 100 },
+            { name: "Ana", age: 11, wish: "Scarf, Hat & Gloves", cost: 50 },
+            { name: "Ioana", age: 13, wish: "Books & Journal", cost: 50 },
+            { name: "Bianca", age: 6, wish: "Doll & Accessories", cost: 50 },
+            { name: "Alexandra", age: 8, wish: "Winter Boots", cost: 50 },
+            { name: "Andreea", age: 10, wish: "Jewelry Kit & Beads", cost: 50 },
+            { name: "Antonia", age: 5, wish: "Teddy Bear & Blanket", cost: 50 },
+            { name: "Daria", age: 7, wish: "Dress & Shoes", cost: 75 },
+            { name: "Denisa", age: 12, wish: "School Bag & Supplies", cost: 75 },
+            { name: "Gabriela", age: 9, wish: "Hair Accessories Set", cost: 50 },
+            { name: "Georgiana", age: 14, wish: "Perfume & Lotion Set", cost: 50 },
+            { name: "Ilinca", age: 6, wish: "Puzzle & Games", cost: 50 },
+            { name: "Iulia", age: 11, wish: "Diary & Pens", cost: 50 },
+            { name: "Larisa", age: 8, wish: "Painting Set & Easel", cost: 75 },
+            { name: "Lorena", age: 10, wish: "Sweater & Jeans", cost: 75 },
+            { name: "Madalina", age: 13, wish: "Make-up Kit", cost: 50 },
+            { name: "Mihaela", age: 7, wish: "Jump Rope & Games", cost: 50 },
+            { name: "Natalia", age: 5, wish: "Coloring Books & Markers", cost: 50 },
+            { name: "Nicoleta", age: 9, wish: "Slippers & PJs", cost: 50 },
+            { name: "Oana", age: 12, wish: "Pajamas & Robe", cost: 50 },
+            { name: "Olivia", age: 6, wish: "Tea Set & Dolls", cost: 50 },
+            { name: "Paula", age: 11, wish: "Scarf & Gloves", cost: 50 },
+            { name: "Raluca", age: 8, wish: "Gloves & Hat", cost: 50 },
+            { name: "Roxana", age: 10, wish: "Leggings & Tunic", cost: 50 },
+            { name: "Simona", age: 14, wish: "Purse & Wallet", cost: 50 },
+            { name: "Stefania", age: 7, wish: "Headband & Jewelry", cost: 50 },
+            { name: "Tatiana", age: 9, wish: "Board Game Collection", cost: 50 },
+            { name: "Teodora", age: 12, wish: "Earrings & Necklace", cost: 50 },
+            { name: "Valentina", age: 6, wish: "Play Dough & Tools", cost: 50 },
+            { name: "Victoria", age: 11, wish: "Cardigan & Top", cost: 50 },
+            { name: "Adelina", age: 8, wish: "Socks & Tights", cost: 50 },
+            { name: "Adriana", age: 13, wish: "T-Shirt & Jeans", cost: 75 },
+            { name: "Alina", age: 5, wish: "Building Blocks", cost: 50 },
+            { name: "Amalia", age: 9, wish: "Notebooks & Pens", cost: 50 },
+            { name: "Anca", age: 10, wish: "Pen Set & Journal", cost: 50 },
+            { name: "Camelia", age: 7, wish: "Ball & Outdoor Toys", cost: 50 },
+            { name: "Carmen", age: 12, wish: "Shoes & Socks", cost: 75 },
+            { name: "Catalina", age: 6, wish: "Chalk & Board", cost: 50 },
+            { name: "Clara", age: 8, wish: "Blanket & Pillow", cost: 50 },
+            { name: "Corina", age: 11, wish: "Umbrella & Rainboots", cost: 75 },
+            { name: "Cristina", age: 14, wish: "Lotion & Body Spray", cost: 50 },
+            { name: "Daniela", age: 9, wish: "Hat & Scarf", cost: 50 },
+            { name: "Delia", age: 7, wish: "Stickers & Book", cost: 50 },
+            { name: "Diana", age: 10, wish: "Candy & Treats", cost: 50 },
+            { name: "Doina", age: 5, wish: "Doll House", cost: 100 },
+            { name: "Ecaterina", age: 13, wish: "Boots & Socks", cost: 75 },
+            { name: "Eliza", age: 8, wish: "Skirt & Top", cost: 50 },
+            { name: "Ema", age: 6, wish: "Toy Phone & Keys", cost: 50 }
+        ];
+
+        function openModal(name, age, wish, cost, type) {
+            const modal = document.getElementById('giftModal');
+            document.getElementById('modal-name').innerText = name;
+            
+            if (age === 'Any Amount' || type === 'star') {
+                document.getElementById('modal-age').innerText = 'All Ages';
+            } else {
+                document.getElementById('modal-age').innerText = age + ' Years Old';
+            }
+            
+            document.getElementById('modal-wish').innerText = wish;
+            document.getElementById('modal-cost').innerText = cost;
+            
+            // Set dynamic Revolut Link based on cost
+            let revolutLink = "https://checkout.revolut.com/pay/b1b6dab4-48f9-43b9-866b-23ffaf181297"; // Default main link
+            
+            if (cost <= 50) {
+                revolutLink = "https://checkout.revolut.com/pay/c8a2e49b-8fac-492e-ab85-9ee6668f8ec9";
+            } else if (cost > 50 && cost <= 75) {
+                revolutLink = "https://checkout.revolut.com/pay/d3d1430b-657c-4a2b-91dd-7b4e77ced632";
+            } else if (cost > 75) {
+                revolutLink = "https://checkout.revolut.com/pay/e6562d0f-79be-46e3-b17d-e2e91c65668d";
+            }
+            
+            // Override for the general star click to go to general donation
+            if (type === 'star') {
+                 revolutLink = "https://checkout.revolut.com/pay/b1b6dab4-48f9-43b9-866b-23ffaf181297";
+            }
+
+            document.getElementById('donate-btn').href = revolutLink;
+
+            modal.classList.remove('hidden');
+        }
+
+        // Wrapper for random selection
+        function openRandomModal() {
+            // Pick random kid
+            const kid = kids[Math.floor(Math.random() * kids.length)];
+            openModal(kid.name, kid.age, kid.wish, kid.cost);
+        }
+
+        function closeModal() {
+            document.getElementById('giftModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

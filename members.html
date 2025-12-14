@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11542630684"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-11542630684');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Inner Circle | Misiunea Iubirii</title>
+    <meta name="description" content="Exclusive operational updates for partners of Misiunea Iubirii. Login required.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:wght@400;700;900&family=Special+Elite&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0F172A',
+                            dark: '#020617',
+                            accent: '#2563EB',
+                            orange: '#EA580C',
+                            gold: '#F59E0B',
+                        },
+                        fontFamily: {
+                            sans: ['Inter', 'sans-serif'],
+                            serif: ['Merriweather', 'serif'],
+                            mono: ['Special Elite', 'monospace'],
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 15px rgba(234, 88, 12, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Typewriter Effect */
+        .typewriter h1 {
+            overflow: hidden;
+            border-right: .15em solid orange;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
+
+        .blur-reveal:hover {
+            filter: blur(0);
+            transition: filter 0.5s ease;
+        }
+        
+        .blur-censored {
+            filter: blur(8px);
+            transition: filter 0.5s ease;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-300 antialiased bg-brand-dark min-h-screen">
+
+    <!-- LOGIN OVERLAY (The Gate) -->
+    <div id="login-gate" class="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-4">
+        <div class="max-w-md w-full text-center">
+            <img src="images/logotransparent-big.png" alt="Logo" class="w-16 h-16 mx-auto mb-8 opacity-50 grayscale">
+            
+            <h2 class="text-2xl font-mono text-brand-orange mb-2 tracking-widest uppercase">Restricted Access</h2>
+            <p class="text-gray-500 mb-8 text-sm">Authorized Personnel & Inner Circle Members Only</p>
+            
+            <div class="bg-gray-900 border border-gray-800 p-8 rounded-xl shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-brand-orange"></div>
+                
+                <form onsubmit="checkLogin(event)" class="space-y-6">
+                    <div>
+                        <label for="password" class="sr-only">Access Code</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-500"></i>
+                            </div>
+                            <input type="password" id="password" class="block w-full pl-10 pr-3 py-3 border border-gray-700 rounded-lg leading-5 bg-black text-gray-300 placeholder-gray-600 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange sm:text-sm" placeholder="Enter Access Code">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-brand-orange hover:bg-orange-700 focus:outline-none transition shadow-glow">
+                        <i class="fas fa-fingerprint mr-2"></i> VERIFY CREDENTIALS
+                    </button>
+                </form>
+                <div id="error-msg" class="text-red-500 text-xs mt-4 hidden">Access Denied. Invalid Code.</div>
+            </div>
+            
+            <div class="mt-8 text-xs text-gray-600">
+                <p>Not a member? <a href="index.html#donate" class="text-gray-400 hover:text-white underline">Join the mission</a> to receive access.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT (Hidden until login) -->
+    <div id="secure-content" class="hidden">
+        
+        <!-- Private Nav -->
+        <nav class="bg-black/50 backdrop-blur-md border-b border-gray-800 sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- LEFT SIDE: Secure Connection Indicator + Main Nav Links -->
+                    <div class="flex items-center gap-6">
+                        <!-- Security Badge -->
+                        <div class="flex items-center gap-2 pr-6 border-r border-gray-800">
+                            <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                            <span class="text-gray-400 text-xs font-mono uppercase tracking-widest hidden sm:inline">Secure Connection</span>
+                        </div>
+
+                        <!-- Main Navigation Links (Visible on Desktop) -->
+                        <div class="hidden md:flex items-center space-x-4">
+                            <a href="index.html" class="text-gray-400 hover:text-white text-sm font-medium transition">Home</a>
+                            <a href="disaster.html" class="text-gray-400 hover:text-white text-sm font-medium transition">Disaster</a>
+                            <a href="christmas.html" class="text-gray-400 hover:text-white text-sm font-medium transition">Angel Tree</a>
+                            <a href="members.html" class="text-brand-orange font-bold text-sm transition">Members</a>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT SIDE: Logout -->
+                    <button onclick="logout()" class="text-gray-500 hover:text-white text-sm font-mono uppercase transition flex items-center gap-2">
+                        <i class="fas fa-sign-out-alt"></i> <span class="hidden sm:inline">Log Out</span>
+                    </button>
+                </div>
+                
+                <!-- Mobile Nav Links (Visible on Mobile) -->
+                <div class="md:hidden py-3 border-t border-gray-800 flex justify-between text-xs text-gray-500">
+                    <a href="index.html" class="hover:text-white">Home</a>
+                    <a href="disaster.html" class="hover:text-white">Disaster</a>
+                    <a href="christmas.html" class="hover:text-white">Angel Tree</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Briefing Header -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="border-l-4 border-brand-orange pl-6 mb-12">
+                <span class="text-brand-orange font-mono text-sm mb-2 block">FROM THE DESK OF THE DIRECTOR</span>
+                <h1 class="text-4xl md:text-5xl font-black text-white font-serif mb-4">Operational Briefing: <span class="text-gray-500">December 2025</span></h1>
+                <p class="text-xl text-gray-400 max-w-3xl leading-relaxed">
+                    What you are about to see is not for the general public. These are the active cases, the raw field reports, and the truth about the fight we are in. Thank you for being in the Inner Circle.
+                </p>
+            </div>
+
+            <!-- Intel Grid -->
+            <div class="grid lg:grid-cols-3 gap-8 mb-16">
+                <!-- Case File 1 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-1.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">ACTIVE RESCUE</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #492: "ELENA"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Border Region<br>Age: 14<br>Status: Extraction Planning Phase</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Intel confirms target location. Team is currently establishing safe house protocols. Funds needed for transport logistics.
+                        </p>
+                        <!-- 65% rounded to 7/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-brand-orange h-full w-[70%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-brand-orange mt-2 font-mono">65% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 2 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-2.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">SAFE / RECOVERY</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #488: "THE SISTERS"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Safe House B<br>Ages: 7 & 9<br>Status: Therapy & Integration</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Successfully extracted last week. Medical checks clear. Trauma counseling began yesterday. They smiled for the first time today.
+                        </p>
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-green-500 h-full w-full"></div>
+                        </div>
+                        <p class="text-right text-xs text-green-500 mt-2 font-mono">100% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 3 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-3.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded font-mono">INTEL GATHERING</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #495: "OPERATION BRIDGE"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Sector 4<br>Target: Trafficking Ring<br>Status: Surveillance</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Monitoring suspicious activity near transport hub. Need resources for prolonged surveillance equipment.
+                        </p>
+                        <!-- 25% rounded to 3/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-yellow-500 h-full w-[30%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-yellow-500 mt-2 font-mono">25% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 4 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-4.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">URGENT</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #498: "MARIA"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Rural East<br>Age: 16<br>Status: Immediate Extraction</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Credible threat received. Extraction window is closing fast. Team is on standby awaiting green light.
+                        </p>
+                        <!-- 50% -> 5/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-brand-orange h-full w-[50%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-brand-orange mt-2 font-mono">50% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 5 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-5.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">LEGAL</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #501: "DOCUMENTATION"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Bucharest<br>Impact: 5 Families<br>Status: Filing</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Securing identity papers for rescued victims to prevent re-trafficking. Legal fees pending.
+                        </p>
+                        <!-- 75% -> 8/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-blue-600 h-full w-[80%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-blue-600 mt-2 font-mono">75% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 6 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-6.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">RECOVERY</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #485: "ANDREI"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Safe House A<br>Age: 12<br>Status: Education</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Enrolled in school program. Needs ongoing support for tutoring and supplies.
+                        </p>
+                        <!-- 90% -> 9/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-green-500 h-full w-[90%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-green-500 mt-2 font-mono">90% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 7 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-7.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded font-mono">LOGISTICS</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #505: "WINTER SUPPLY"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Multiple<br>Impact: 20 Victims<br>Status: Procurement</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Sourcing winter coats and heating fuel for safe houses. Urgent need before temperatures drop.
+                        </p>
+                        <!-- 33% -> 3/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-yellow-500 h-full w-[30%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-yellow-500 mt-2 font-mono">33% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 8 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-8.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">ACTIVE RESCUE</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #508: "GROUP B"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Sector 1<br>Victims: 3<br>Status: Planning</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Received tip about location holding multiple victims. Assessing security risks for intervention.
+                        </p>
+                        <!-- 20% -> 2/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-brand-orange h-full w-[20%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-brand-orange mt-2 font-mono">20% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 9 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-9.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">SAFE</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #480: "IOANA"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Vocational Ctr<br>Age: 19<br>Status: Job Training</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Completed trauma therapy. Starting culinary training program next week. Success story in making.
+                        </p>
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-green-500 h-full w-full"></div>
+                        </div>
+                        <p class="text-right text-xs text-green-500 mt-2 font-mono">100% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 10 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-10.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded font-mono">MEDICAL</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #510: "HEALTH"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Clinic<br>Patient: Case #492<br>Status: Treatment</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Urgent dental work required for recent rescue. Infection risk high. Appointment scheduled.
+                        </p>
+                        <!-- 50% -> 5/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-yellow-500 h-full w-[50%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-yellow-500 mt-2 font-mono">50% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 11 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-11.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">ACTIVE</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #512: "TRANSIT"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Border<br>Objective: Intercept<br>Status: Mobile</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Vehicle identified moving towards border. Coordinating with local authorities for intercept.
+                        </p>
+                        <!-- 75% -> 8/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-brand-orange h-full w-[80%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-brand-orange mt-2 font-mono">75% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 12 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-12.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">LEGAL</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #515: "CUSTODY"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Court<br>Client: Case #470<br>Status: Hearing</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Fighting for custody rights against traffickers claiming guardianship. Lawyer fees due.
+                        </p>
+                        <!-- 25% -> 3/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-blue-600 h-full w-[30%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-blue-600 mt-2 font-mono">25% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 13 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-13.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">RECOVERY</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #475: "FAMILY"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Safe House<br>Unit: Mother & Child<br>Status: Secure</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Reunited mother with child. Providing safe housing and food for 3 months.
+                        </p>
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-green-500 h-full w-full"></div>
+                        </div>
+                        <p class="text-right text-xs text-green-500 mt-2 font-mono">100% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 14 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-14.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded font-mono">SUPPORT</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #520: "THERAPY"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Center<br>Group: 10 Youths<br>Status: Ongoing</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Weekly art therapy sessions for recent rescues showing positive results. Material costs.
+                        </p>
+                        <!-- 50% -> 5/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-yellow-500 h-full w-[50%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-yellow-500 mt-2 font-mono">50% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 15 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-15.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">ALERT</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #522: "MISSING"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Station<br>Age: 15<br>Status: Search</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Report of missing teen seen near train station. Team distributing flyers and checking cameras.
+                        </p>
+                        <!-- 25% -> 3/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-brand-orange h-full w-[30%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-brand-orange mt-2 font-mono">25% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 16 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-16.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">ADMIN</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #525: "SECURE COMM"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: HQ<br>Item: Tech<br>Status: Upgrade</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Upgrading secure communication lines for field operatives to prevent interception.
+                        </p>
+                        <!-- 66% -> 7/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-blue-600 h-full w-[70%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-blue-600 mt-2 font-mono">66% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 17 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-17.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">SAFE</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #460: "GRADUATION"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: School<br>Age: 18<br>Status: Independent</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Former victim graduating high school today. Transitioning to independent living program.
+                        </p>
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-green-500 h-full w-full"></div>
+                        </div>
+                        <p class="text-right text-xs text-green-500 mt-2 font-mono">100% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 18 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-18.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded font-mono">PREVENTION</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #530: "AWARENESS"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Schools<br>Reach: 500 Kids<br>Status: Scheduling</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Printing materials for anti-trafficking workshops in 5 vulnerable high schools.
+                        </p>
+                        <!-- 20% -> 2/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-yellow-500 h-full w-[20%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-yellow-500 mt-2 font-mono">20% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Case File 19 -->
+                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-600 transition">
+                    <div class="relative h-48 bg-black">
+                        <img src="images/case-19.jpg" onerror="this.src='https://placehold.co/600x400/111/333?text=CONFIDENTIAL'" class="w-full h-full object-cover opacity-60 blur-censored group-hover:blur-sm transition duration-700">
+                        <div class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded font-mono">EMERGENCY</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-mono">CASE #533: "SAFE HOUSE"</h3>
+                        <p class="text-gray-400 text-sm mb-4">Location: Undisclosed<br>Need: Repair<br>Status: Critical</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Heating system failure at main safe house. Immediate repair needed for winter.
+                        </p>
+                        <!-- 83% -> 8/10 visual -->
+                        <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-brand-orange h-full w-[80%]"></div>
+                        </div>
+                        <p class="text-right text-xs text-brand-orange mt-2 font-mono">83% FUNDED</p>
+                    </div>
+                </div>
+
+                <!-- Action Panel -->
+                <div class="bg-gradient-to-br from-brand-blue to-black border border-brand-orange/30 rounded-xl p-8 flex flex-col justify-center text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <i class="fas fa-shield-alt text-9xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4 font-serif">Mission Critical</h3>
+                    <p class="text-gray-300 mb-8 relative z-10">We have identified 3 new locations requiring immediate intervention. We need to mobilize the rapid response team by Friday.</p>
+                    <a href="https://checkout.revolut.com/pay/b1b6dab4-48f9-43b9-866b-23ffaf181297" target="_blank" class="bg-brand-orange hover:bg-orange-600 text-white font-bold py-4 px-6 rounded-lg transition shadow-glow relative z-10">
+                        AUTHORIZE FUNDS <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Field Video Section -->
+            <div class="bg-black border border-gray-800 rounded-2xl overflow-hidden mb-16">
+                <div class="p-4 border-b border-gray-800 flex justify-between items-center bg-gray-900/50">
+                    <span class="text-brand-orange font-mono text-xs uppercase"><i class="fas fa-video mr-2"></i> ENCRYPTED FEED // FIELD_REPORT_DEC_01.MP4</span>
+                    <span class="text-gray-600 text-xs font-mono">00:00:00:00</span>
+                </div>
+                <div class="aspect-w-16 aspect-h-9 bg-gray-900 flex items-center justify-center relative group cursor-pointer" style="height: 500px;">
+                    <!-- Placeholder for video -->
+                    <div class="text-center opacity-50 group-hover:opacity-100 transition">
+                        <div class="w-20 h-20 rounded-full border-2 border-white/30 flex items-center justify-center mx-auto mb-4 group-hover:border-brand-orange group-hover:bg-brand-orange/20 transition">
+                            <i class="fas fa-play text-3xl text-white ml-2"></i>
+                        </div>
+                        <p class="text-gray-400 font-mono text-sm">CLICK TO DECRYPT & PLAY</p>
+                    </div>
+                    <img src="images/video-poster.jpg" onerror="this.src='https://placehold.co/1920x1080/000/333?text=SECURE+VIDEO+FEED'" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none">
+                </div>
+            </div>
+
+            <!-- The Oath -->
+            <div class="text-center max-w-2xl mx-auto border-t border-gray-800 pt-16">
+                <i class="fas fa-quote-left text-3xl text-gray-700 mb-6"></i>
+                <p class="text-xl text-gray-400 italic font-serif mb-8">
+                    "We do not speak names publicly. We do not show faces clearly. We move in silence so that they can live in freedom. We go where it's dark. This is the pact of the Inner Circle."
+                </p>
+                <div class="flex justify-center gap-4 text-sm font-mono text-gray-600">
+                    <span>// END OF BRIEFING</span>
+                    <span>// MISIUNEA IUBIRII</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Simple Client-Side "Lock" (Not real security, just a gate for the experience)
+        // Password is set to: RESCUE2025
+        function checkLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('password').value;
+            const gate = document.getElementById('login-gate');
+            const content = document.getElementById('secure-content');
+            const error = document.getElementById('error-msg');
+
+            // Hardcoded password for demo purposes
+            if (pass === 'RESCUE2025') {
+                gate.classList.add('hidden');
+                content.classList.remove('hidden');
+                // Removed session storage to require login every time
+            } else {
+                error.classList.remove('hidden');
+                document.getElementById('password').classList.add('border-red-500');
+                setTimeout(() => {
+                    error.classList.add('hidden');
+                    document.getElementById('password').classList.remove('border-red-500');
+                }, 3000);
+            }
+        }
+
+        function logout() {
+            // Simply reloading the page will now re-trigger the login gate
+            location.reload();
+        }
+
+        // Removed the window.onload check for session storage
+    </script>
+</body>
+</html>
