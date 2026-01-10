@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11542630684"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11542630684"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-      gtag('config', 'AW-11542630684');
-    </script>
+  gtag('config', 'AW-11542630684');
+</script>
+
+<!-- Event snippet for Donate Button Click conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-11542630684/zs3YCMCPg-AbEJyi-v8q',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donate | Misiunea Iubirii</title>
@@ -32,7 +49,7 @@
                         brand: {
                             blue: '#0B253A',   /* Matching Logo Blue */
                             accent: '#2563EB', /* Bright action blue */
-                            orange: '#EA580C', /* Updated to match new Orange */
+                            orange: '#EA580C', /* Matching Logo Gold */
                             cream: '#F8F7F4',  /* Soft background */
                         }
                     },
@@ -154,47 +171,49 @@
 
                         <!-- Impact Tiers -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                            <!-- Tier 1: Inner Circle (Clickable) -->
-                            <div class="border-2 border-gray-100 hover:border-brand-orange rounded-xl p-4 transition group relative overflow-hidden bg-gray-50 hover:bg-white flex flex-col items-center justify-center text-center gap-2">
+                            <!-- Tier 1 -->
+                            <div class="border-2 border-gray-100 hover:border-brand-orange rounded-xl p-4 cursor-pointer transition group relative overflow-hidden bg-gray-50 hover:bg-white" onclick="selectAmount('25')">
                                 <div class="absolute top-0 right-0 bg-brand-orange text-brand-blue text-[10px] font-bold px-2 py-1 rounded-bl-lg uppercase tracking-wider">Monthly</div>
-                                <div class="text-lg font-black text-brand-blue leading-tight">Join the Inner Circle</div>
-                                <a href="https://www.paypal.com/donate/?hosted_button_id=UKFFFUWQNHPD8" target="_blank" class="bg-brand-blue hover:bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded-full shadow-sm transition transform hover:-translate-y-0.5">
-                                    Donate Now
-                                </a>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-2xl font-black text-brand-blue">$25</div>
+                                    <div class="text-sm font-semibold text-gray-600 leading-tight">Join the <br>Inner Circle</div>
+                                </div>
                             </div>
 
-                            <!-- Tier 2: Jacket (Static Info) -->
-                            <div class="border-2 border-gray-100 rounded-xl p-4 bg-gray-50 flex flex-col items-center justify-center text-center">
-                                <p class="text-gray-700 font-bold text-lg leading-tight">
-                                    <span class="text-brand-blue font-black text-xl">$30</span> buys a warm jacket
-                                </p>
+                            <!-- Tier 2 -->
+                            <div class="border-2 border-gray-100 hover:border-brand-orange rounded-xl p-4 cursor-pointer transition group bg-gray-50 hover:bg-white" onclick="selectAmount('30')">
+                                <div class="flex items-center gap-3">
+                                    <div class="text-2xl font-black text-brand-blue">$30</div>
+                                    <div class="text-sm font-semibold text-gray-600 leading-tight">Warm Winter<br>Jacket</div>
+                                </div>
                             </div>
 
-                            <!-- Tier 3: Supplies (Static Info) -->
-                            <div class="border-2 border-gray-100 rounded-xl p-4 bg-gray-50 flex flex-col items-center justify-center text-center">
-                                <p class="text-gray-700 font-bold text-lg leading-tight">
-                                    <span class="text-brand-blue font-black text-xl">$50</span> buys a pack with basic supplies
-                                </p>
+                            <!-- Tier 3 -->
+                            <div class="border-2 border-gray-100 hover:border-brand-orange rounded-xl p-4 cursor-pointer transition group bg-gray-50 hover:bg-white" onclick="selectAmount('50')">
+                                <div class="flex items-center gap-3">
+                                    <div class="text-2xl font-black text-brand-blue">$50</div>
+                                    <div class="text-sm font-semibold text-gray-600 leading-tight">Emergency<br>Food & Hygiene</div>
+                                </div>
                             </div>
 
-                            <!-- Tier 4: Rescue (Static Info) -->
-                            <div class="border-2 border-gray-100 rounded-xl p-4 bg-gray-50 flex flex-col items-center justify-center text-center">
-                                <p class="text-gray-700 font-bold text-lg leading-tight">
-                                    <span class="text-brand-blue font-black text-xl">$100</span> helps fund a rescue mission
-                                </p>
+                            <!-- Tier 4 -->
+                            <div class="border-2 border-gray-100 hover:border-brand-orange rounded-xl p-4 cursor-pointer transition group bg-gray-50 hover:bg-white" onclick="selectAmount('100')">
+                                <div class="flex items-center gap-3">
+                                    <div class="text-2xl font-black text-brand-blue">$100</div>
+                                    <div class="text-sm font-semibold text-gray-600 leading-tight">Rescue<br>Mission Fund</div>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Payment Buttons -->
-                        <div class="space-y-4">
-                            <a href="https://www.paypal.com/donate/?hosted_button_id=7WBGJWQCLF4ZQ" target="_blank" class="block w-full bg-[#FFC439] hover:bg-[#FFD369] text-blue-900 font-bold text-xl py-5 rounded-xl shadow-md transition transform hover:-translate-y-0.5 text-center border-b-4 border-[#E0A800] hover:border-[#FFC439]">
-                                <i class="fab fa-paypal mr-2"></i> Donate via PayPal
-                            </a>
-                            
-                            <a href="https://checkout.revolut.com/pay/b1b6dab4-48f9-43b9-866b-23ffaf181297" target="_blank" class="block w-full bg-brand-blue hover:bg-brand-accent text-white font-bold text-xl py-5 rounded-xl shadow-md transition transform hover:-translate-y-0.5 text-center border-b-4 border-black/20">
-                                <img src="images/RevolutSymbol.png" alt="R" class="h-5 w-auto inline mr-2 brightness-200 grayscale"> Donate via Revolut
-                            </a>
-                        </div>
+            <div class="flex flex-col sm:flex-row justify-center gap-8 items-center">
+                <a href="https://www.paypal.com/donate/?hosted_button_id=7WBGJWQCLF4ZQ" target="_blank" class="w-full sm:w-auto bg-[#FFC439] hover:bg-[#FFD369] text-blue-900 text-xl px-12 py-6 rounded-2xl font-bold shadow-2xl transition transform hover:-translate-y-1 flex items-center justify-center gap-4 border-b-4 border-[#E0A800] hover:border-[#FFC439]">
+                    <i class="fab fa-paypal text-3xl"></i> Donate via PayPal
+                </a>
+                <a href="https://checkout.revolut.com/pay/b1b6dab4-48f9-43b9-866b-23ffaf181297" target="_blank" class="w-full sm:w-auto bg-white hover:bg-gray-50 text-brand-blue text-xl px-12 py-6 rounded-2xl font-bold shadow-2xl transition transform hover:-translate-y-1 flex items-center justify-center gap-4 border-b-4 border-gray-200 hover:border-white">
+                    <img src="images/RevolutSymbol.png" alt="Revolut" class="h-8 w-auto"> Donate via Revolut
+                </a>
+            </div>
 
                         <div class="mt-8 text-center">
                             <p class="text-xs text-gray-400">
@@ -266,8 +285,8 @@
                 <h4 class="text-white font-bold mb-6 uppercase text-sm tracking-wider">Quick Links</h4>
                 <ul class="space-y-4 text-base font-medium">
                     <li><a href="index.html#mission" class="hover:text-brand-orange transition block py-1">Our Projects</a></li>
-                    <li><a href="disaster.html" class="hover:text-brand-orange transition block py-1">Disaster Relief</a></li>
-                    <li><a href="legal.html" class="hover:text-brand-orange transition block py-1">Legal & Justice</a></li>
+                    <li><a href="index.html#team" class="hover:text-brand-orange transition block py-1">Leadership Team</a></li>
+                    <li><a href="index.html#stories" class="hover:text-brand-orange transition block py-1">Impact Stories</a></li>
                     <li><a href="mailto:contact@lovemin.org" class="hover:text-brand-orange transition block py-1">Contact Us</a></li>
                 </ul>
             </div>
@@ -293,33 +312,9 @@
     </footer>
 
     <script>
-        // Mobile Menu Logic
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        const nav = document.getElementById('main-nav');
-
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu on link click
-        menu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
-
-        // Add shadow to nav on scroll
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                nav.classList.add('shadow-md');
-            } else {
-                nav.classList.remove('shadow-md');
-            }
-        });
-
         function selectAmount(amount) {
-            // Visual feedback for selection
+            // Visual feedback for selection (could be expanded to auto-fill a custom amount field in a future integration)
+            // For now, it's a visual cue before they click the main payment buttons
             const cards = document.querySelectorAll('.grid > div');
             cards.forEach(card => {
                 card.classList.remove('border-brand-orange', 'bg-white', 'shadow-lg');
@@ -327,6 +322,8 @@
             });
             
             // Add active state to clicked card
+            // In a real implementation, you might pass this amount to the PayPal URL via query params
+            // e.g. hosted_button_id...?amount=50
             event.currentTarget.classList.remove('border-gray-100', 'bg-gray-50');
             event.currentTarget.classList.add('border-brand-orange', 'bg-white', 'shadow-lg');
         }
